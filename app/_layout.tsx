@@ -7,6 +7,8 @@ import { useFonts } from "expo-font";
 import LandingScreen from "../src/screen/auth/LandingScreen";
 import SplashScreen from "../src/screen/auth/SplashScreen";
 import SignIn from "@/src/screen/auth/SignIn";
+import SignUp from "@/src/screen/auth/SignUp";
+import HomeScreen from "../src/screen/main/HomeScreen"
 const Stack = createNativeStackNavigator();
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -27,6 +29,8 @@ export default function Layout() {
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="LandingScreen" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+           <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </NavigationIndependentTree>

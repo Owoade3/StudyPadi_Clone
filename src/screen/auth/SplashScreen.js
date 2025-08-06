@@ -43,7 +43,7 @@ const SplashScreen = () => {
         }),
         Animated.timing(textOpacity, {
           toValue: 1,
-          duration: 500,
+          duration: 600,
           useNativeDriver: true,
         }),
       ]).start();
@@ -60,7 +60,7 @@ const SplashScreen = () => {
   };
 useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("LandingScreen");
+      navigation.replace("LandingScreen");
     }, 3500); // Navigate after 3 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer on unmount

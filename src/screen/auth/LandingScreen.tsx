@@ -41,6 +41,7 @@ const LandingScreen = () => {
             title={"create new account"}
             textStyle={{ color: COLORS.primary2 }}
             BtnStyle={{ borderColor: COLORS.primary2 }}
+             onPress={()=>navigation.navigate("SignUp")}
           />
         </View>
       </View>

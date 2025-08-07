@@ -8,7 +8,8 @@ import LandingScreen from "../src/screen/auth/LandingScreen";
 import SplashScreen from "../src/screen/auth/SplashScreen";
 import SignIn from "@/src/screen/auth/SignIn";
 import SignUp from "@/src/screen/auth/SignUp";
-import HomeScreen from "../src/screen/main/HomeScreen"
+import HomeScreen from "../src/screen/main/HomeScreen";
+import Bottom from "@/src/navigator/BottomTab";
 const Stack = createNativeStackNavigator();
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -24,13 +25,13 @@ export default function Layout() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName="SplashScreen"
+          initialRouteName="Bottom"
         >
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="LandingScreen" component={LandingScreen} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="SignUp" component={SignUp} />
-           <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="Bottom" component={Bottom} />
         </Stack.Navigator>
       </NavigationContainer>
     </NavigationIndependentTree>

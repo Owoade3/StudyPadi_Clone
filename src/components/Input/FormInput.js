@@ -93,7 +93,7 @@ const FormInput = ({
             color: COLORS.red,
             ...FONTS.body6,
             fontSize: SIZES.height * 0.012,
-            marginTop: 10,
+            marginTop: SIZES.height*0.01
           }}
         >
           {error}
@@ -108,10 +108,10 @@ export default FormInput;
 const styles = StyleSheet.create({
   inputStyle: {
     borderWidth: 2,
-    height: SIZES.height * 0.062,
+    height: SIZES.height * 0.064,
     borderRadius: SIZES.height * 0.008,
     backgroundColor: COLORS.gray,
-    width: SIZES.width * 0.95,
+    width: SIZES.width * 0.945,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

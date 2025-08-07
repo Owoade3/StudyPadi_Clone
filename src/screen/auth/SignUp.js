@@ -5,13 +5,16 @@ import { COLORS, FONTS, SIZES } from "@/src/constants/theme";
 import { useNavigation } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+
 import {
   Keyboard,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import icon from "../../constants/icon";
 const SignUp = () => {
   // state Management
@@ -55,12 +58,12 @@ const SignUp = () => {
   const validate = async () => {
     Keyboard.dismiss();
     let valid = true;
-    if (!firstName.trim()) {
-      handlerror("Please your input first name ", "firstName");
+    if (!firstName.trim().length > 0) {
+      handlerror("Please  input your first name ", "firstName");
       valid = false;
     }
-    if (!lastName.trim()) {
-      handlerror("Please your input last name ", "lastName");
+    if (!lastName.trim().length > 0) {
+      handlerror("Please input your  last name ", "lastName");
       valid = false;
     }
     if (loginMethod === "Email") {
@@ -110,190 +113,196 @@ const SignUp = () => {
     }
   };
   return (
-    <View style={styles.page}>
+    <SafeAreaView style={styles.page}>
       <StatusBar style="dark" />
-      <View>
-        <Text style={styles.text1}>Create an account</Text>
-        <Text style={styles.text2}>
-          Step back into your academic journey wih ease
-        </Text>
-      </View>
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: SIZES.height * 0.02,
-        }}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
-        {["Email", "Mobile"].map((method) => (
-          <ToggleBtn
-            key={method}
-            title={method}
-            onPress={() => setLoginMethod(method)}
-            BtnStyle={{
-              backgroundColor:
-                loginMethod === method ? COLORS.primary : COLORS.gray,
-              marginLeft: method === "Mobile" ? SIZES.width * 0.02 : 0,
-            }}
-            textStyle={{
-              color: loginMethod === method ? COLORS.white : COLORS.black,
-              ...FONTS.body6,
-              fontSize: SIZES.height * 0.014,
-            }}
-          />
-        ))}
-      </View>
-      <View style={{ marginTop: SIZES.height * 0.02 }}>
-        <FormInput
-          placeholder={"first name"}
-          image1={icon.person}
-          keyboard={"default"}
-          value={firstName}
-          onChangeText={setfirstName}
-          error={errors.firstName}
-          onFocus={() => {
-            handlerror(null, "firstName");
-          }}
-        />
-        <FormInput
-          placeholder={"last name"}
-          image1={icon.person}
-          keyboard={"default"}
-          value={lastName}
-          onChangeText={setLastName}
-          error={errors.lastName}
-          onFocus={() => {
-            handlerror(null, "lastName");
-          }}
-        />
-        {loginMethod === "Email" ? (
-          <FormInput
-            placeholder={"Email Address"}
-            image1={icon.mail}
-            keyboard={"email-address"}
-            value={email}
-            onChangeText={setEmail}
-            error={errors.email}
-            onFocus={() => {
-              handlerror(null, "email");
-            }}
-          />
-        ) : (
-          <FormInput
-            placeholder={"Mobile Number"}
-            image1={icon.phone} // assuming you have a phone icon
-            keyboard={"phone-pad"}
-            value={phone}
-            onChangeText={setPhone}
-            error={errors.phone}
-            onFocus={() => {
-              handlerror(null, "phone");
-            }}
-          />
-        )}
+        <View>
+          <Text style={styles.text1}>Create an account</Text>
+          <Text style={styles.text2}>
+            Step back into your academic journey wih ease
+          </Text>
+        </View>
 
-        <FormInput
-          placeholder={"password"}
-          image1={icon.padlock}
-          image2={icon.eye}
-          image3={icon.eyeclose}
-          keyboard={"Password"}
-          value={pwd}
-          onChangeText={setPwd}
-          error={errors.pwd}
-          onFocus={() => {
-            handlerror(null, "pwd");
-          }}
-        />
-      </View>
-      <FormButton
-        BtnStyle={{ marginTop: SIZES.height * 0.04 }}
-        title={"Create Account"}
-        onPress={() => validate()}
-        textStyle={{
-          width: SIZES.width * 0.4,
-          ...FONTS.body2b,
-          fontSize: SIZES.height * 0.016,
-          textAlign: "center",
-        }}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: SIZES.height * 0.05,
-        }}
-      >
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
+            marginTop: SIZES.height * 0.02,
           }}
         >
+          {["Email", "Mobile"].map((method) => (
+            <ToggleBtn
+              key={method}
+              title={method}
+              onPress={() => setLoginMethod(method)}
+              BtnStyle={{
+                backgroundColor:
+                  loginMethod === method ? COLORS.primary : COLORS.gray,
+                marginLeft: method === "Mobile" ? SIZES.width * 0.02 : 0,
+              }}
+              textStyle={{
+                color: loginMethod === method ? COLORS.white : COLORS.black,
+                ...FONTS.body6,
+                fontSize: SIZES.height * 0.014,
+              }}
+            />
+          ))}
+        </View>
+
+        <View style={{ marginTop: SIZES.height * 0.02 }}>
+          <FormInput
+            placeholder={"first name"}
+            image1={icon.person}
+            keyboard={"default"}
+            value={firstName}
+            onChangeText={setfirstName}
+            error={errors.firstName}
+            onFocus={() => {
+              handlerror(null, "firstName");
+            }}
+          />
+          <FormInput
+            placeholder={"last name"}
+            image1={icon.person}
+            keyboard={"default"}
+            value={lastName}
+            onChangeText={setLastName}
+            error={errors.lastName}
+            onFocus={() => {
+              handlerror(null, "lastName");
+            }}
+          />
+          {loginMethod === "Email" ? (
+            <FormInput
+              placeholder={"Email Address"}
+              image1={icon.mail}
+              keyboard={"email-address"}
+              value={email}
+              onChangeText={setEmail}
+              error={errors.email}
+              onFocus={() => {
+                handlerror(null, "email");
+              }}
+            />
+          ) : (
+            <FormInput
+              placeholder={"Mobile Number"}
+              image1={icon.phone} // assuming you have a phone icon
+              keyboard={"phone-pad"}
+              value={phone}
+              onChangeText={setPhone}
+              error={errors.phone}
+              onFocus={() => {
+                handlerror(null, "phone");
+              }}
+            />
+          )}
+
+          <FormInput
+            placeholder={"password"}
+            image1={icon.padlock}
+            image2={icon.eye}
+            image3={icon.eyeclose}
+            keyboard={"Password"}
+            value={pwd}
+            onChangeText={setPwd}
+            error={errors.pwd}
+            onFocus={() => {
+              handlerror(null, "pwd");
+            }}
+          />
+        </View>
+        <FormButton
+          BtnStyle={{ marginTop: SIZES.height * 0.04 }}
+          title={"Create Account"}
+          onPress={() => validate()}
+          textStyle={{
+            width: SIZES.width * 0.4,
+            ...FONTS.body2b,
+            fontSize: SIZES.height * 0.016,
+            textAlign: "center",
+          }}
+        />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: SIZES.height * 0.05,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                width: SIZES.width * 0.4,
+                height: SIZES.height * 0.0015,
+                backgroundColor: COLORS.gray4,
+                marginRight: SIZES.width * 0.05,
+              }}
+            ></View>
+            <Text
+              style={{
+                width: SIZES.width * 0.0446,
+                ...FONTS.body,
+                fontSize: SIZES.height * 0.014,
+              }}
+            >
+              or
+            </Text>
+          </View>
           <View
             style={{
               width: SIZES.width * 0.4,
               height: SIZES.height * 0.0015,
               backgroundColor: COLORS.gray4,
-              marginRight: SIZES.width * 0.05,
+              marginLeft: SIZES.width * 0.05,
             }}
           ></View>
-          <Text
-            style={{
-              width: SIZES.width * 0.0446,
-              ...FONTS.body,
-              fontSize: SIZES.height * 0.014,
-            }}
-          >
-            or
-          </Text>
         </View>
         <View
           style={{
-            width: SIZES.width * 0.4,
-            height: SIZES.height * 0.0015,
-            backgroundColor: COLORS.gray4,
-            marginLeft: SIZES.width * 0.05,
+            justifyContent: "center",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: SIZES.height * 0.05,
           }}
-        ></View>
-      </View>
-      <View
-        style={{
-          justifyContent: "center",
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: SIZES.height * 0.05,
-        }}
-      >
-        <Text
-          style={{
-            textAlign: "center",
-            ...FONTS.body,
-            fontSize: SIZES.height * 0.014,
-          }}
-        >
-          Already have an account?{"  "}
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("SignIn")}
         >
           <Text
             style={{
-              color: COLORS.orange,
+              textAlign: "center",
               ...FONTS.body,
               fontSize: SIZES.height * 0.014,
             }}
           >
-            Log In
+            Already have an account?{"  "}
           </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate("SignIn")}
+          >
+            <Text
+              style={{
+                color: COLORS.orange,
+                ...FONTS.body,
+                fontSize: SIZES.height * 0.014,
+              }}
+            >
+              Log In
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -303,7 +312,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingVertical: SIZES.height * 0.1,
+
     paddingHorizontal: SIZES.height * 0.012,
   },
   text1: {

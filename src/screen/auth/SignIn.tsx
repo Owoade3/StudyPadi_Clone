@@ -54,8 +54,8 @@ const SignIn = () => {
     console.log("Login data saved:", { email, phone, pwd });
     Alert.alert("Success", "Login data saved successfully!");
 
-    // 👉 Place your login API logic or navigation here
-    // navigation.navigate("Home") or similar
+    
+    navigation.navigate("Bottom") 
 
   } catch (error) {
     console.log("Error during login: ", error);

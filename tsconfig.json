@@ -2,16 +2,21 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "allowJs": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "src/screen/auth/LandingScreen.tsx", "src/screen/auth/SplashScreen.js", "src/components/Button/ToggleBtn.js", "src/screen/auth/SignUp.js"  ]
+    "expo-env.d.ts",
+    "src/screen/auth/LandingScreen.tsx",
+    "src/screen/auth/SplashScreen.js",
+    "src/components/Button/ToggleBtn.js",
+    "src/screen/auth/SignUp.js",
+    "src/api/client.js",
+    "src/api/auth.js"
+  ]
 }
